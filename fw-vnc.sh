@@ -1,10 +1,10 @@
-#!/bin/bash
+# os tested debian 12 -13
 # title             :firewall and vnc script
-# description       :This script was written for the debian package tigervnc-scraping-server, in order to log in to the actual X session on display :0
+# description       :tigervnc-scraping-server, log in to the actual X session on display :0 and uncompliaced firewall for pia
 # date              :2025
-# version           :0.2
-# notes             :install tigervnc-scraping-server (debian stretch)
-# What's the script name
+# version           :0.3
+# notes             :install tigervnc-scraping-server  PIA VPN  ( you will be totally blocked without PIA running and local allowed in PIA)
+#
 FW1="   " #setting var variable
 FW2="you have not  FW checked status, so check status"
 echo "$FW1" #displaying var variable on terminal
@@ -13,41 +13,20 @@ VNC1="unknown" #setting var variable
 VNC2="not verifyed"
 echo "$VNC1" #displaying var variable on terminal
 echo "$VNC2" #displaying var variable on terminal
-
-
-SCRIPTNAME="fWVNC"
-
-# Where the x0vncserver executable is located, default:
-VNCSERVER="/usr/bin/x0vncserver"
-
-# Set home directory
-HOMEDIR=${HOME}
-
-# Set home ip
-INTERFACE=$"192.168.0.120"
-
-# Default VNC User directory
-VNCDIR="${HOMEDIR}/.vnc"
-
-# Set log file for debugging
-LOGFILE="${VNCDIR}/logfile"
-
-# The vnc passwd file. If it doesn't exist, you need to create it
-PASSWDFILE="${VNCDIR}/passwd"
-
-# What's the Geometry  -Geometry 1280x720
-GEOMETRY="1920x1080"
-
-# Leave this on ":0", since we want to log in to the actual session
-DISPLAY=":0"
-
-# Set the port (default 5900)
-VNCPORT="5900"
-
+SCRIPTNAME="fWVNC"  # What's the script name
+VNCSERVER="/usr/bin/x0vncserver"   #Where the x0vncserver executable is located, default:
+HOMEDIR=${HOME}  # Set home directory
+INTERFACE=$"192.168.0.120"   # Set home ip
+VNCDIR="${HOMEDIR}/.vnc"   # Default VNC User directory
+LOGFILE="${VNCDIR}/logfile"   # Set log file for debugging
+PASSWDFILE="${VNCDIR}/passwd"   # The vnc passwd file. If it doesn't exist, you need to create it
+GEOMETRY="1920x1080"   # What's the Geometry  -Geometry 1280x720
+DISPLAY=":0"  # Leave this on ":0", since we want to log in to the actual session
+VNCPORT="5900"    #Set the port (default 5900)
 # PID of the actual VNC server running
 # The PID is actually created this way, so it is compatible with the vncserver command
 # if you want to kill the VNC server manually, just type 
-# vncserver -kill :0
+# x0vncserver -kill :0
 PIDFILE="${VNCDIR}/${HOSTNAME}${DISPLAY}.pid"
 
 # Add some color to the script
@@ -67,8 +46,6 @@ fn_pid() {
         return 1
     fi
 }
-
-
 
 # vncmenu
 vncmenu () {
@@ -381,3 +358,4 @@ done
 }
 
 mainmenu1
+

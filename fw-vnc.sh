@@ -72,8 +72,8 @@ fn_pid() {
 
 # vncmenu
 vncmenu () {
-echo "$VNC1" #displaying var variable on terminal
-echo "$VNC2" #displaying var variable on terminal
+echo "vnc" "$VNC1" #displaying var variable on terminal
+echo "vnc" "$VNC2" #displaying var variable on terminal
 
 if [ ! -d ${VNCDIR} ]
 then
@@ -90,12 +90,13 @@ then
     exit 1
 fi
 
-  local PS3='Please enter vnc option: '
-  local options=("Start vnc" "restart vnc" "stopvnc" "statusvnc" "Sub menu quit")
+  local PS3='Please enter vnc option: 1start 2 restart 3stop 3-status 4-MM 5-q'
+  local options=("Start vnc" "restart vnc" "stopvnc" "statusvnc" "mainmenu" "quit")
   local opt
   select opt in "${options[@]}"
   do
       case $opt in
+      #
           "Start vnc")
               echo "startvnc"
               sleep 3
@@ -125,6 +126,7 @@ fi
         fi
 
               ;;
+#              
           "restart vnc")
               echo "restart vnc"
               sleep 3
@@ -168,11 +170,11 @@ fi
                 VNC1="vnc failed"
                 VNC2="vnc failed start"
 		echo
-                exit 1
+               # exit 1
             fi
         fi
               ;;
-              #
+#              
               "stopvnc")
               echo "stopvnc"
               sleep 3
@@ -198,7 +200,7 @@ fi
             #exit 1
         fi
               ;; 
-              #
+#              
               "statusvnc")
               echo "status vnc"
               sleep 3
@@ -217,13 +219,13 @@ fi
 	    echo
         fi
               ;; 
-              #
-             "mainmenu item 3")
+#
+             "mainmenu")
               echo "you chose sub item 3"
               mainmenu1
               ;; 
-              #
-          "Sub menu quit")
+#
+          "quit")
               exit
               ;;
           *) echo "invalid option $REPLY";;
@@ -233,14 +235,15 @@ fi
 
 # submenu firewall
 firewallmenu () {
-   echo "$var"
-    echo "$var2"
-  local PS3='Please enter sub option: '
-  local options=("firewall up" "firewalldown" "firewall reset" "firewall disable" "Sub menu quit")
+   echo "$FW"
+   echo "$FW"
+  local PS3='Please enter sub option: 1fw-u 2fw-d 3fw-d 4fw-s 5-q'
+  local options=("firewall up" "firewalldown" "firewall reset" "firewall disable" "firewall status" "Sub menu quit")
   local opt
   select opt in "${options[@]}"
   do
       case $opt in
+#      
           "firewall up")
               echo "firewall up1"
               sleep 3
@@ -291,14 +294,16 @@ echo "turning it all on"
 sudo ufw enable
 FW1="firewall on pirate ready"
 echo; read -rsn1 -p "Press any key to continue . . ."
-######################################
+
                 break
               ;;
-              
+#           
           "firewalldown")
               echo "firewalldown"
+              FW1="firewall shutdown"
               sleep 3
               ;;
+#         
           "firewall reset")
               echo "firewall reset"
               sleep 3
@@ -306,33 +311,38 @@ echo; read -rsn1 -p "Press any key to continue . . ."
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
-FW1="firewall reset to default"
+FW1="firewall reset to default not great"
+FW2="firewall not verifyed"
 echo " firewall reset"
 echo; read -rsn1 -p "Press any key to continue . . ."
-#############################################
-                break
+               # break
               ;;
+#    
           "firewall status")
               echo "firewall status"
               sleep 3
               sudo ufw status
                 echo; read -rsn1 -p "Press any key to continue . . ."
                 FW2="firewall status checked"
-                break
+               # break
               ;;
+#             
           "firewall disable")
               echo "firewall disable"
               sleep 3
               sudo ufw disable
                 echo; read -rsn1 -p "Press any key to continue . . ."
                 FW1="firewall disabled"
-                break
+                FW2="firewall not verifyed"
+               # break
               ;;
+#              
              "mainmenu item 3")
               echo "mainmenu"
               sleep 3
               mainmenu1
-              ;; 
+              ;;
+#              
           "Sub menu quit")
               exit
               ;;
@@ -343,11 +353,12 @@ echo; read -rsn1 -p "Press any key to continue . . ."
 
 # main menu
 mainmenu1 () {
-echo "$FW1" #displaying var variable on terminal
-echo "$FW2" #displaying var variable on terminal
-echo "$VNC1" #displaying var variable on terminal
-echo "$VNC2" #displaying var variable on terminal
+echo "firewall" "$FW1" #displaying var variable on terminal
+echo "firewall" "$FW2" #displaying var variable on terminal
+echo "vnc" "$VNC1" #displaying var variable on terminal
+echo "vnc" "$VNC2" #displaying var variable on terminal
 PS3='Please enter main option: '
+echo "1 Main menu 2 VNCmenu 3 firewall menu 4 Main menu 5 quit"
 options=("Main menu" "VNCmenu" "firewall menu" "Main menu quit")
 select opt in "${options[@]}"
 do

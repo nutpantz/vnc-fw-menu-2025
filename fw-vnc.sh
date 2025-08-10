@@ -2,8 +2,8 @@
 # title             :firewall and vnc script
 # description       :tigervnc-scraping-server, log in to the actual X session on display :0 and uncompliaced firewall for pia
 # date              :2025
-# version           :0.3
-# notes             :install tigervnc-scraping-server  PIA VPN  ( you will be totally blocked without PIA running and local allowed in PIA)
+# version           :0.5
+# notes             :install tigervnc-scraping-server w PIA VPN  ( with firewall on you will be totally blocked without PIA running and local allowed in PIA)
 #
 FW1="   " #setting var variable
 FW2="you have not  FW checked status, so check status"
@@ -76,8 +76,9 @@ fi
       #
           "Start vnc")
               echo "startvnc"
+                            echo -n "Starting VNC Server on display ${DISPLAY} "
+              echo "${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT}"
               sleep 3
-              echo -n "Starting VNC Server on display ${DISPLAY} "
         fn_pid
         if [ $? -eq 0 ]
         then
@@ -106,8 +107,9 @@ fi
 #              
           "restart vnc")
               echo "restart vnc"
-              sleep 3
               echo -n "Restarting VNC Server on display ${DISPLAY} "
+              echo "${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT}"
+              sleep 3
         fn_pid
         if [ $? -eq 0 ]
         then
@@ -358,4 +360,3 @@ done
 }
 
 mainmenu1
-

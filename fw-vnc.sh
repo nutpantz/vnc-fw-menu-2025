@@ -217,13 +217,13 @@ fi
 firewallmenu () {
    echo "$FW"
    echo "$FW"
-  local PS3='Please enter sub option: 1fw-u 2fw-d 3fw-d 4fw-s 5-q'
+  local PS3='Please enter sub option: 1-fw-u 2-fw-d 3-fw-r 4-fw-d 5-fw-s 6-quit'
   local options=("firewall up" "firewalldown" "firewall reset" "firewall disable" "firewall status" "Sub menu quit")
   local opt
   select opt in "${options[@]}"
   do
       case $opt in
-#      
+#1     
           "firewall up")
               echo "firewall up1"
               sleep 3
@@ -277,13 +277,13 @@ echo; read -rsn1 -p "Press any key to continue . . ."
 
                 break
               ;;
-#           
+#2           
           "firewalldown")
               echo "firewalldown"
               FW1="firewall shutdown"
               sleep 3
               ;;
-#         
+#3         
           "firewall reset")
               echo "firewall reset"
               sleep 3
@@ -297,16 +297,8 @@ echo " firewall reset"
 echo; read -rsn1 -p "Press any key to continue . . ."
                # break
               ;;
-#    
-          "firewall status")
-              echo "firewall status"
-              sleep 3
-              sudo ufw status
-                echo; read -rsn1 -p "Press any key to continue . . ."
-                FW2="firewall status checked"
-               # break
-              ;;
-#             
+
+# 4            
           "firewall disable")
               echo "firewall disable"
               sleep 3
@@ -316,13 +308,16 @@ echo; read -rsn1 -p "Press any key to continue . . ."
                 FW2="firewall not verifyed"
                # break
               ;;
-#              
-             "mainmenu item 3")
-              echo "mainmenu"
+# 5   
+          "firewall status")
+              echo "firewall status"
               sleep 3
-              mainmenu1
+              sudo ufw status
+                echo; read -rsn1 -p "Press any key to continue . . ."
+                FW2="firewall status checked"
+               # break
               ;;
-#              
+#6              
           "Sub menu quit")
               exit
               ;;

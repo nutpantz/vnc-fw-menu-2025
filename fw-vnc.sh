@@ -29,7 +29,7 @@ VNCPORT="5900"    #Set the port (default 5900)
 # if you want to kill the VNC server manually, just type 
 # x0vncserver -kill :0
 PIDFILE="${VNCDIR}/${HOSTNAME}${DISPLAY}.pid"
-
+#-SecurityTypes VncAuth,TLSVnc
 # Add some color to the script
 OK="[\033[1;32mok\033[0m]"
 FAILED="[\033[1;31mfailed\033[0m]"
@@ -78,7 +78,7 @@ fi
           "Start vnc")
               echo "startvnc"
                             echo -n "Starting VNC Server on display ${DISPLAY} "
-              echo "${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT}"
+              echo "${VNCSERVER} -SecurityTypes VncAuth,TLSVnc -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT}"
               sleep 3
         fn_pid
         if [ $? -eq 0 ]
@@ -87,7 +87,7 @@ fi
             echo -e "VNC Server is running (pid: ${VAR})"
 	    echo
         else
-            ${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
+            ${VNCSERVER} -SecurityTypes VncAuth,TLSVnc -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
 	    if [ $? -eq 0 ]
 	    then
             	fn_pid
@@ -109,7 +109,7 @@ fi
           "restart vnc")
               echo "restart vnc"
               echo -n "Restarting VNC Server on display ${DISPLAY} "
-              echo "${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT}"
+              echo "${VNCSERVER} -SecurityTypes VncAuth,TLSVnc -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT}"
               sleep 3
         fn_pid
         if [ $? -eq 0 ]
@@ -118,7 +118,7 @@ fi
 
             if [ $? -eq 0 ]
             then 
-                ${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
+                ${VNCSERVER} --SecurityTypes VncAuth,TLSVnc Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
                 echo -e ${OK}
 		echo
                 fn_pid 
@@ -137,7 +137,7 @@ fi
 
         else
 
-            ${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
+            ${VNCSERVER} -SecurityTypes VncAuth,TLSVnc -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
             if [ $? -eq 0 ]
             then
                 echo -e ${OK}

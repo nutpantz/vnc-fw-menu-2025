@@ -68,7 +68,7 @@ then
     exit 1
 fi
 
-  local PS3='Please enter vnc option: 1start 2 restart 3stop 3-status 4-MM 5-q'
+  local PS3='Please enter vnc option: 1-start 2-restart 3-stop 4-status 5-MM 6-q'
   local options=("Start vnc" "restart vnc" "stopvnc" "statusvnc" "mainmenu" "quit")
   local opt
   select opt in "${options[@]}"
@@ -87,7 +87,7 @@ fi
             echo -e "VNC Server is running (pid: ${VAR})"
 	    echo
         else
-            ${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface 192.168.0.130 -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
+            ${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
 	    if [ $? -eq 0 ]
 	    then
             	fn_pid
@@ -118,7 +118,7 @@ fi
 
             if [ $? -eq 0 ]
             then 
-                ${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface 192.168.0.130 -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
+                ${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
                 echo -e ${OK}
 		echo
                 fn_pid 
@@ -137,7 +137,7 @@ fi
 
         else
 
-            ${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface 192.168.0.130 -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
+            ${VNCSERVER} -Geometry ${GEOMETRY} -localhost=0 -interface ${INTERFACE} -display ${DISPLAY} -passwordfile ${PASSWDFILE} -rfbport ${VNCPORT} >> ${LOGFILE} 2>&1 &
             if [ $? -eq 0 ]
             then
                 echo -e ${OK}
@@ -247,7 +247,7 @@ sudo ufw allow from 192.168.2.0/24 to any port 5901
 sudo ufw allow from 192.168.1.0/24 to any port 5900
 sudo ufw allow from 192.168.1.0/24 to any port 5901
 
-#radicale  http://dlcdnet.asus.com/pub/ASUS/LiveUpdate/Release/Wireless/Discovery.zip
+#radicale 
 echo "radicale in"
 sudo ufw allow from 192.168.0.0/24 to any port 5232 
 sudo ufw allow from 192.168.1.0/24 to any port 5232
